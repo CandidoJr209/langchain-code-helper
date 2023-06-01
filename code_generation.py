@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+import os
 
 from langchain.llms import OpenAI
 from langchain.prompts import PromptTemplate
@@ -7,7 +8,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
-llm = OpenAI(temperature=0.9)
+llm = OpenAI(temperature=0.4)
 
 
 prompt = PromptTemplate(
@@ -18,7 +19,13 @@ prompt = PromptTemplate(
 print(prompt.format(model="user"))
 code = llm(prompt.format(model="user"))
 
-file_name = "generated_code.py"
+file_name = "models.py"
+current_path = os.getcwd()
+full_path = current_path + f"/generated_code/{file_name}"
 
-with open(file_name, "w") as file:
+directory = os.path.dirname(full_path)
+if not os.path.exists(directory):
+    os.makedirs(directory)
+
+with open(full_path, "w") as file:
     file.write(code)
