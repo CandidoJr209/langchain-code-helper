@@ -11,8 +11,14 @@ llm = OpenAI(temperature=0.9)
 
 
 prompt = PromptTemplate(
-    input_variables=["product"],
-    template="What is a good name for a company that makes {product}?",
+    input_variables=["model"],
+    template="Generate a django model that represents a {model}",
 )
 
-print(prompt.format(product="colorful socks"))
+print(prompt.format(model="user"))
+code = llm(prompt.format(model="user"))
+
+file_name = "generated_code.py"
+
+with open(file_name, "w") as file:
+    file.write(code)
