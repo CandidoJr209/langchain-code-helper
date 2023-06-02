@@ -1,12 +1,13 @@
 from django.db import models
 
-class User(models.Model):
-    first_name = models.CharField(max_length=50)
-    last_name = models.CharField(max_length=50)
-    email = models.EmailField(unique=True)
-    password = models.CharField(max_length=50)
-    date_joined = models.DateTimeField(auto_now_add=True)
-    last_login = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        return self.first_name + ' ' + self.last_name
+class House(models.Model):
+    address = models.CharField(max_length=255)
+    bedrooms = models.IntegerField()
+    bathrooms = models.IntegerField()
+    square_footage = models.IntegerField()
+    year_built = models.IntegerField()
+    lot_size = models.IntegerField()
+    heating_type = models.CharField(max_length=255)
+    cooling_type = models.CharField(max_length=255)
+    garage_type = models.CharField(max_length=255)
+    pool = models.BooleanField()
